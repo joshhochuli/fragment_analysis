@@ -1,0 +1,115 @@
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Hydrogen Bonds interactions: 0
+
+========== Halogen Bonds ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Halogen Bonds interactions: 0
+
+========== Good Contacts ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+    Good A:136(GLN)            1       21
+    ligand title:                         interactions:  21
+    Good A:137(ALA)            1       28
+    ligand title:                         interactions:  28
+    Good A:267(TYR)            1        5
+    ligand title:                         interactions:   5
+    Good A:311(TRP)            1       15
+    ligand title:                         interactions:  15
+    Good A:314(PHE)            1       46
+    ligand title:                         interactions:  46
+    Good A:367(VAL)            1       18
+    ligand title:                         interactions:  18
+    Good A:369(LEU)            1       10
+    ligand title:                         interactions:  10
+    Good A:374(PRO)            1       27
+    ligand title:                         interactions:  27
+    Good A:375(ASP)            1        8
+    ligand title:                         interactions:   8
+    Good A:377(ALA)            1       17
+    ligand title:                         interactions:  17
+    Good A:378(TYR)            1       38
+    ligand title:                         interactions:  38
+    Good A:382(PRO)            1       10
+    ligand title:                         interactions:  10
+Total Good Contacts interactions: 243
+
+========== Bad Contacts =====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+     Bad A:137(ALA)            1        2
+    ligand title:                         interactions:   2
+     Bad A:311(TRP)            1        1
+    ligand title:                         interactions:   1
+     Bad A:314(PHE)            1        4
+    ligand title:                         interactions:   4
+     Bad A:374(PRO)            1        1
+    ligand title:                         interactions:   1
+     Bad A:378(TYR)            1        1
+    ligand title:                         interactions:   1
+Total Bad Contacts interactions: 9
+
+========== Ugly Contacts ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+    Ugly A:374(PRO)            1        1
+    ligand title:                         interactions:   1
+Total Ugly Contacts interactions: 1
+
+========== Salt Bridges =====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Salt Bridges interactions: 0
+
+========== Pi-Cation ========================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-Cation interactions: 0
+
+========== Pi-pi Face-to-Face ===============================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-pi Face-to-Face interactions: 0
+
+========== Pi-pi Edge-to-Face ===============================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-pi Edge-to-Face interactions: 0
+
+========== Hydrophobic ======================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+   HPhob A:136(GLN)            1        2
+    ligand title:                         interactions:   2
+   HPhob A:137(ALA)            1        6
+    ligand title:                         interactions:   6
+   HPhob A:311(TRP)            1        1
+    ligand title:                         interactions:   1
+   HPhob A:314(PHE)            1       15
+    ligand title:                         interactions:  15
+   HPhob A:367(VAL)            1        2
+    ligand title:                         interactions:   2
+   HPhob A:369(LEU)            1        1
+    ligand title:                         interactions:   1
+   HPhob A:374(PRO)            1        2
+    ligand title:                         interactions:   2
+   HPhob A:378(TYR)            1        9
+    ligand title:                         interactions:   9
+Total Hydrophobic interactions: 38
+
+========== Water-mediated H-Bonds ===========================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Water-mediated H-Bonds interactions: 0
+
+========== Aromatic H-Bonds =================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Aromatic H-Bonds interactions: 0
+
+========== Metal Contacts ===================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Metal Contacts interactions: 0

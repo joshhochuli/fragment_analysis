@@ -1,0 +1,87 @@
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Hydrogen Bonds interactions: 0
+
+========== Halogen Bonds ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Halogen Bonds interactions: 0
+
+========== Good Contacts ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+    Good A:45(LEU)             1       16
+    ligand title:                         interactions:  16
+    Good A:119(HIS)            1       11
+    ligand title:                         interactions:  11
+    Good A:255(GLU)            1        2
+    ligand title:                         interactions:   2
+    Good A:256(ILE)            1       12
+    ligand title:                         interactions:  12
+    Good A:259(ARG)            1       21
+    ligand title:                         interactions:  21
+    Good A:260(GLN)            1        9
+    ligand title:                         interactions:   9
+    Good C:219(ARG)            1       30
+    ligand title:                         interactions:  30
+Total Good Contacts interactions: 101
+
+========== Bad Contacts =====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+     Bad A:259(ARG)            1        1
+    ligand title:                         interactions:   1
+     Bad C:219(ARG)            1        1
+    ligand title:                         interactions:   1
+Total Bad Contacts interactions: 2
+
+========== Ugly Contacts ====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+    Ugly C:219(ARG)            1        1
+    ligand title:                         interactions:   1
+Total Ugly Contacts interactions: 1
+
+========== Salt Bridges =====================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Salt Bridges interactions: 0
+
+========== Pi-Cation ========================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-Cation interactions: 0
+
+========== Pi-pi Face-to-Face ===============================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-pi Face-to-Face interactions: 0
+
+========== Pi-pi Edge-to-Face ===============================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Pi-pi Edge-to-Face interactions: 0
+
+========== Hydrophobic ======================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+   HPhob A:45(LEU)             1        5
+    ligand title:                         interactions:   5
+   HPhob A:259(ARG)            1        2
+    ligand title:                         interactions:   2
+Total Hydrophobic interactions: 7
+
+========== Water-mediated H-Bonds ===========================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Water-mediated H-Bonds interactions: 0
+
+========== Aromatic H-Bonds =================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Aromatic H-Bonds interactions: 0
+
+========== Metal Contacts ===================================================================
+Interactions grouped by receptor residue:
+    Type Residue        # of ligands # of contacts
+Total Metal Contacts interactions: 0
