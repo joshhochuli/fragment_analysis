@@ -146,6 +146,11 @@ def make_interaction_histograms(df, normalize = True):
     if not os.path.isdir(stem):
         print("'plots' directory does not exist in above directory, exiting...")
 
+    stem = stem + "interaction_histograms/"
+
+    if not os.path.isdir(stem):
+        os.mkdir(stem)
+
     f = plt.figure(figsize = (16,9))
 
     for fragment_name in fragment_names:
