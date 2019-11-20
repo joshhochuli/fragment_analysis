@@ -32,6 +32,32 @@ code_to_letter = {
             "VAL": "V",
             }
 
+letter_to_code = dict([[v,k] for k,v in code_to_letter.items()])
+letter_to_code["H"] = "HIS"
+
+code_to_group = {
+        "ARG":"Positively Charged",
+        "HIS":"Positively Charged",
+        "LYS":"Positively Charged",
+        "ASP":"Negatively Charged",
+        "GLU":"Negatively Charged",
+        "SER":"Polar",
+        "THR":"Polar",
+        "ASN":"Polar",
+        "GLN":"Polar",
+        "ALA":"Hydrophobic",
+        "ILE":"Hydrophobic",
+        "LEU":"Hydrophobic",
+        "MET":"Hydrophobic",
+        "PHE":"Hydrophobic",
+        "TRP":"Hydrophobic",
+        "TYR":"Hydrophobic",
+        "VAL":"Hydrophobic",
+        "CYS":"CYS",
+        "GLY":"GLY",
+        "PRO":"PRO",
+        }
+
 
 def get_sequence_from_file(filename):
 
@@ -122,6 +148,127 @@ def get_fragment_counts(df):
 
     return pandas.DataFrame(list(zip(fragment_names, fragment_counts, ligand_counts)),
             columns = ["fragment_name", "fragment_count", "ligand_count"])
+
+def make_sequence_histograms(df, normalize = True,
+        count_multiple_occurrences = True, grouped = True):
+
+    fragment_names = df.fragment_name.unique()
+
+    empty_counts = {}
+    if grouped:
+        for group_name in code_to_group.values():
+            empty_counts[group_name] = 0
+    else:
+        for aa_name in code_to_letter.keys():
+            empty_counts[aa_name] = 0
+
+    aa_names = list(code_to_letter.keys())
+    group_names = ["Positively Charged", "Negatively Charged", "Polar",
+    "Hydrophobic", "CYS", "GLY", "PRO"]
+
+    #for plots
+    if grouped:
+        x_vals = np.array(range(len(group_names)))
+    else:
+        x_vals = np.array(range(len(aa_names)))
+    width = 0.4
+
+    stem = "../plots/"
+
+    if not os.path.isdir(stem):
+        print("'plots' directory does not exist in above directory, exiting...")
+
+    if grouped:
+        stem = stem + "grouped_sequence_histograms/"
+    else:
+        stem = stem + "sequence_histograms/"
+
+    if not os.path.isdir(stem):
+        os.mkdir(stem)
+
+    f = plt.figure(figsize = (16,9))
+
+    for fragment_name in fragment_names:
+
+        plt.clf()
+
+        if grouped:
+            output_filename = stem + f"{fragment_name}_grouped_sequence_hist.png"
+        else:
+            output_filename = stem + f"{fragment_name}_sequence_hist.png"
+
+        fragment_counts = copy.deepcopy(empty_counts)
+        ligand_counts = copy.deepcopy(empty_counts)
+
+        frag_sequences = df[
+                (df.fragment_name == fragment_name) &
+                (df.is_fragment == True)].sequence.unique()
+
+        ligand_sequences = df[
+                (df.fragment_name == fragment_name) &
+                (df.is_fragment == False)].sequence.unique()
+
+        frag_count = len(frag_sequences)
+        ligand_count = len(ligand_sequences)
+
+        if frag_count == 0 and ligand_count == 0:
+            continue
+
+        print(output_filename)
+
+        for sequence in frag_sequences:
+            if not count_multiple_occurrences:
+                sequence = set(sequence)
+            for aa in sequence:
+                code = letter_to_code[aa]
+                if grouped:
+                    code = code_to_group[code]
+                fragment_counts[code] += 1
+        for sequence in ligand_sequences:
+            if not count_multiple_occurrences:
+                sequence = set(sequence)
+            for aa in sequence:
+                code = letter_to_code[aa]
+                if grouped:
+                    code = code_to_group[code]
+                ligand_counts[code] += 1
+
+        total_frag_count = sum([len(seq) for seq in frag_sequences])
+        total_ligand_count = sum([len(seq) for seq in ligand_sequences])
+
+        if(normalize):
+
+            if(total_frag_count != 0):
+                fragment_counts = {x: fragment_counts[x] / total_frag_count for x in
+                        fragment_counts}
+
+            if(total_ligand_count != 0):
+                ligand_counts = {x: ligand_counts[x] / total_ligand_count for x in
+                        ligand_counts}
+
+        frag_counts_list = []
+        ligand_counts_list = []
+
+        if grouped:
+            #be sure that group order matches count order
+            for group in group_names:
+                frag_counts_list.append(fragment_counts[group])
+                ligand_counts_list.append(ligand_counts[group])
+
+        else:
+            #be sure that amino acid order matches count order
+            for aa in aa_names:
+                frag_counts_list.append(fragment_counts[aa])
+                ligand_counts_list.append(ligand_counts[aa])
+
+        plt.bar(x_vals - width/2, frag_counts_list, width, label = f"Fragment (N = {frag_count})", color = "black")
+        plt.bar(x_vals + width/2, ligand_counts_list, width, label = f"Ligand (N = {ligand_count})", color = "gray")
+        plt.xticks(x_vals, group_names)
+        plt.title(f"{fragment_name}")
+        plt.ylabel("Frequency")
+        plt.legend()
+        plt.savefig(output_filename, bbox_inches = "tight")
+
 
 #uses interactions from file
 #one plot for each interaction type
@@ -224,7 +371,7 @@ def make_interaction_histograms(df, normalize = True):
 def main():
 
     df = get_dataframe()
-    make_interaction_histograms(df)
+    make_sequence_histograms(df)
 
 if __name__ == "__main__":
     main()
