@@ -125,23 +125,21 @@ def get_fragment_counts(df):
 
 #uses interactions from file
 #one plot for each interaction type
-def make_interaction_histograms(df):
+def make_interaction_histograms(df, normalize = True):
 
     fragment_names = df.fragment_name.unique()
     interaction_types = df.interaction_type.unique()
 
     #copied for each fragment
     empty_aa_counts = {}
-    for fragment_name in fragment_names:
-        empty_aa_counts[fragment_name] = {}
-        for aa_name in code_to_letter.keys():
-            empty_aa_counts[fragment_name][aa_name] = 0
+    for aa_name in code_to_letter.keys():
+        empty_aa_counts[aa_name] = 0
 
     aa_names = list(code_to_letter.keys())
+
+    #for plots
     x_vals = np.array(range(len(aa_names)))
     width = 0.4
-
-    normalize = True
 
     stem = "../plots/"
 
@@ -165,13 +163,13 @@ def make_interaction_histograms(df):
             compound_aa_counts = copy.deepcopy(empty_aa_counts)
 
             frag = df[
-                    (df.fragment_name == fragment_name) & 
-                    (df.interaction_type == interaction_type) & 
+                    (df.fragment_name == fragment_name) &
+                    (df.interaction_type == interaction_type) &
                     (df.is_fragment == True)]
 
             compound = df[
-                    (df.fragment_name == fragment_name) & 
-                    (df.interaction_type == interaction_type) & 
+                    (df.fragment_name == fragment_name) &
+                    (df.interaction_type == interaction_type) &
                     (df.is_fragment == False)]
 
             frag_count = len(frag.protein_name.unique())
@@ -182,22 +180,35 @@ def make_interaction_histograms(df):
 
             print(output_filename)
 
-            for val in frag.amino_acid:
-                fragment_aa_counts[fragment_name][val] += 1
-            for val in compound.amino_acid:
-                compound_aa_counts[fragment_name][val] += 1
+            for aa in frag.amino_acid:
+                fragment_aa_counts[aa] += 1
+            for aa in compound.amino_acid:
+                compound_aa_counts[aa] += 1
 
-            frag_counts = np.array(list(fragment_aa_counts[fragment_name].values()))
-            compound_counts = np.array(list(compound_aa_counts[fragment_name].values()))
+            total_frag_count = len(frag.amino_acid)
+            total_ligand_count = len(compound.amino_acid)
 
             if(normalize):
-                if(sum(frag_counts) != 0):
-                    frag_counts = frag_counts / sum(frag_counts)
-                if(sum(compound_counts) != 0):
-                    compound_counts = compound_counts / sum(compound_counts)
 
-            plt.bar(x_vals - width/2, frag_counts, width, label = f"Fragment (N = {frag_count})")
-            plt.bar(x_vals + width/2, compound_counts, width, label = f"Compound (N = {compound_count})")
+                if(total_frag_count != 0):
+                    fragment_aa_counts = {x: fragment_aa_counts[x] / total_frag_count for x in
+                            fragment_aa_counts}
+
+                if(total_ligand_count != 0):
+                    compound_aa_counts = {x: compound_aa_counts[x] / total_ligand_count for x in
+                            compound_aa_counts}
+
+
+            frag_counts_list = []
+            ligand_counts_list = []
+
+            #be sure that amino acid order matches count order
+            for aa in aa_names:
+                frag_counts_list.append(fragment_aa_counts[aa])
+                ligand_counts_list.append(compound_aa_counts[aa])
+
+            plt.bar(x_vals - width/2, frag_counts_list, width, label = f"Fragment (N = {frag_count})")
+            plt.bar(x_vals + width/2, ligand_counts_list, width, label = f"Compound (N = {compound_count})")
             plt.xticks(x_vals, aa_names)
             plt.title(f"{fragment_name}, {interaction_type}")
             plt.ylabel("Frequency")
