@@ -263,7 +263,10 @@ def make_sequence_histograms(df, normalize = True,
 
         plt.bar(x_vals - width/2, frag_counts_list, width, label = f"Fragment (N = {frag_count})", color = "black")
         plt.bar(x_vals + width/2, ligand_counts_list, width, label = f"Ligand (N = {ligand_count})", color = "gray")
-        plt.xticks(x_vals, group_names)
+        if grouped:
+            plt.xticks(x_vals, group_names)
+        else:
+            plt.xticks(x_vals, aa_names)
         plt.title(f"{fragment_name}")
         plt.ylabel("Frequency")
         plt.legend()
@@ -371,7 +374,7 @@ def make_interaction_histograms(df, normalize = True):
 def main():
 
     df = get_dataframe()
-    make_interaction_histograms(df)
+    make_sequence_histograms(df, grouped = False)
 
 if __name__ == "__main__":
     main()
